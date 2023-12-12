@@ -18,9 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Course Name
-author: Instructor Name
-email: your-email@example.com
+title: CS 521 - Systems Programming
+author: Phil Peterson
+email: phpeterson@usfca.edu
 baseurl: ""  # the subpath of your site, e.g. /blog
 favicon: favicon.ico  # Icon displayed in the tab
 due_date_format: "%a, %b %-d, %Y at %I:%M %p" # Thu, Jan 27, 2022 at 11:59 PM

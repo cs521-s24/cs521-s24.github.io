@@ -1,0 +1,59 @@
+---
+layout: default
+---
+{{ content }}
+{%- assign date_format = "%b %-d, %Y" %}
+{% for category_pretty in site.ordered-categories %}
+  {% assign category = category_pretty | slugify %}
+  {% if site.categories[category] %}
+    <h3 class="category-head">{{ category_pretty }}</h3>
+    <table>
+      <colgroup>
+        <col span="1" style="width:20%">
+        <col span="1" style="width:50%">
+        <col span="1" style="width:30%">
+      </colgroup>
+      <tr>
+        <th>Date</th>
+        <th>Topics</th>
+        <th>Materials</th>
+      </tr>
+      {% for row in site.categories[category] %}
+        <tr>
+          <td>
+            {{ row.date | date: date_format }}
+          </td>
+          <td>
+            {{ row.topics | markdownify | remove: '<p>' | remove: '</p>' }} 
+            {%- if row.slides -%}
+              <a class="capsule capsule-generic" href="{{ row.slides }}" target="_new">slides</a>
+            {%-endif %}
+            {%- if row.assignment -%}
+              <br>Assigned <a class="capsule capsule-assignment" href="{{ row.assignment.url }}" target="_new">{{ row.assignment.name }}</a>
+            {%-endif %}            
+          </td>
+          <td>
+            {%- if row.notes1 %}
+              <a class="capsule capsule-1" href="{{ row.notes1 }}">notes-01</a>
+            {%- endif %}
+            {%- if row.video1 %}
+              <a class="capsule capsule-1" href="{{ row.video1 }}">video-01</a>
+            {%- endif %}
+            {%- if row.code1 %}
+              <a class="capsule capsule-1" href="{{ row.code1 }}">code-01</a>
+            {%- endif %}
+            {%- if row.notes2 %}
+              <a class="capsule capsule-2" href="{{ row.notes2 }}">notes-02</a>
+            {%- endif %}
+            {%- if row.video2 %}
+              <a class="capsule capsule-2" href="{{ row.video2 }}">video-02</a>
+            {%- endif %}
+            {%- if row.code2 %}
+              <a class="capsule capsule-2" href="{{ row.code2 }}">code-02</a>
+            {%- endif %}
+          </td>
+        </tr>        
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+<div class="home">
+  {{ content }}
+
+  <h1 class="page-heading">Timeline</h1>
+
+  {%- if site.posts.size > 0 -%}
+	{%- assign date_format = "%b %-d, %Y" %}
+	<table>
+    <colgroup>
+      <col span="1" style="width:20%">
+      <col span="1" style="width:50%">
+      <col span="1" style="width:30%">
+    </colgroup>
+    <tr>
+      <th>Date</th>
+      <th>Topics</th>
+      <th>Materials</th>
+    </tr>
+		{%- for row in site.posts %}
+      <tr>
+        <td>
+          {{ row.date | date: date_format }}
+        </td>
+        <td>
+          {{ row.topics | markdownify | remove: '<p>' | remove: '</p>' }} 
+        </td>
+        <td>
+          {%- if row.slides -%}
+            <a href="{{ row.slides }}" target="_new">slides</a>
+          {%-endif %}
+          {%- if row.notes1 %}
+            <a href="{{ row.notes1 }}">notes-01</a>
+          {%- endif %}
+          {%- if row.video1 %}
+            <a href="{{ row.video1 }}">video-01</a>
+          {%- endif %}
+          {%- if row.code1 %}
+            <a href="{{ row.code1 }}">code-01</a>
+          {%- endif %}
+          {%- if row.notes2 %}
+            <a href="{{ row.notes2 }}">notes-02</a>
+          {%- endif %}
+          {%- if row.video2 %}
+            <a href="{{ row.video2 }}">video-02</a>
+          {%- endif %}
+          {%- if row.code2 %}
+            <a href="{{ row.code2 }}">code-02</a>
+          {%- endif %}
+        </td>
+      </tr>
+		{%- endfor %}
+	</table>
+{%- endif %}
+
+
+</div>

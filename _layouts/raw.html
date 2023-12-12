@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include reveal-head.html %}
+<body>
+<div class="reveal">
+    <div class="slides">
+
+        <section data-markdown
+                 data-separator="^---"
+                 data-separator-vertical="^___"
+                 data-charset="utf-8"
+                 data-notes="^Note:">
+            <script type="text/template">{{ content }}</script>
+        </section>
+
+    </div>
+</div>
+{% include reveal.html highlight=true %}
+</body>
+</html>

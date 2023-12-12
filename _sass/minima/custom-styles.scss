@@ -1,0 +1,70 @@
+// Placeholder to allow defining custom styles that override everything else.
+// (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+
+.site-header {
+    background-color: $dons-green;
+    border-top: none;
+    border-bottom: 4px solid $dons-yellow;
+  }
+  
+  .site-title, .site-title:visited {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    color: white;
+    font-weight: 400;
+  }
+  
+  .site-nav .page-link {
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  .post-link {
+      color: $dons-teal;
+  }
+
+  .page-heading {
+      color: $dons-teal;
+  }
+
+  .due-date {
+    color: $dons-red;
+    font-weight: bold;
+  }
+
+  .capsule-assignment, .capsule-assignment:visited, .capsule-assignment:hover {
+    color: $dons-red;
+  }
+
+  .capsule-generic, .capsule-generic:visited, .capsule-generic:hover {
+    color: $dons-green;
+  }
+
+  .capsule-1, .capsule-1:visited, .capsule-1:hover {
+    color: $dons-orange;
+  }
+
+  .capsule-2, .capsule-2:visited, .capsule-2:hover {
+    color: $dons-teal;
+  }
+
+  .capsule {
+      background: white;
+      border: 1px solid;
+      border-radius: 0.25em;
+      font-family: sans-serif;
+      font-size: 0.8em;
+      text-transform: capitalize;
+      padding: 2px;
+  }
+
+  .div-toggle {
+    border: 1px solid black;
+    box-shadow: 4px 4px 4px darkgray;
+    margin: 10px;
+    padding-left: 4px;
+  }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+  }

@@ -47,7 +47,7 @@ ordered-categories:
   - "Fourth Thing"
   - "Third Thing"
   - "Second Thing"
-  - "First Thing"
+  - "Intro to C"
 
 reveal:
   transition: slide

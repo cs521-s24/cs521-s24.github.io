@@ -1,0 +1,55 @@
+---
+layout: raw
+---
+
+# Struct in C
+
+--- 
+# struct 
+
+used to group related variables 
+
+Java's instance variables are grouped together
+
+```java
+in Point.java
+public class Point { public float x; public float y; } 
+```
+
+In C, we use struct
+
+```c
+struct point {
+    float x;
+    float y;
+};
+```
+---
+In C, we use struct
+
+```c
+struct point {
+    float x;
+    float y;
+};
+...
+
+struct point p;
+p.x = 1.0;
+p.y = 0.1;
+```
+
+---
+# typedef struct
+
+```sh
+typedef struct point {
+    float x;
+    float y;
+} point;
+...
+
+point p;
+p.x = 1.0;
+p.y = 0.1;
+```

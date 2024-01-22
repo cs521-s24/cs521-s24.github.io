@@ -1,0 +1,43 @@
+---
+layout: raw
+---
+
+# File I/O in C
+
+--- 
+# How to open and close a file
+
+
+```sh
+in stdio.h
+
+FILE* fopen(const char* path, const char* mode)
+//e.g. FILE* fs = fopen("passwords.txt", "r");
+FILE* fclose(FILE* stream)
+//fclose(fs);
+```
+
+
+
+- [code sample](https://github.com/cs221-s23/inclass/blob/main/week04/section01/filedemo.c)
+---
+
+# How to read from a file
+
+```sh
+size_t fread(void *restrict ptr, size_t size, size_t nitems,
+         FILE *restrict stream);
+      //e.g. fread(&buf, MAX_PASSWORD_LENGTH,  1, fs);
+```
+
+returns the number of objects read
+---
+
+#  How to write into a file 
+
+```sh
+size_t fwrite(const void *restrict ptr, size_t size, size_t nitems,
+         FILE *restrict stream);
+    //e.g. fwrite(&buf, MAX_PASSWORD_LENGTH, 1, fs);
+```
+returns the number of objects written

@@ -1,0 +1,105 @@
+---
+layout: raw
+---
+
+# Makefiles
+---
+1. `make` is a tool for building one file which depends on another file
+1. The executable `lab01` depends on `lab01.c`
+1. We can make a rule which automatically rebuilds `lab01` when `lab01.c` is newer
+---
+`Makefile` for `lab01`
+```sh
+lab01: lab01.c
+[tab]  gcc -g -o lab01 lab01.c
+```
+
+The general form of a `Makefile` is
+```sh
+target: dependencies
+[tab]   recipe to build target from dependencies
+```
+---
+If `lab01.c` has a newer file mod date than `lab01`
+```sh
+$ make
+gcc -g -o lab01 lab01.c
+```
+<br>
+
+If `lab01` has a newer file mod date than `lab01.c`
+```sh
+$ make
+make: 'lab01' is up to date.
+```
+---
+A `Makefile` can have multiple targets
+
+```sh
+foobar: foo.o bar.o
+    gcc -g -o foobar foo.o bar.o
+foo.o: foo.c
+    gcc -c -g -o foo.o foo.c
+bar.o: bar.c
+    gcc -c -g -o bar.o bar.c
+```
+
+Works, but hard to read and maintain <!-- .element: class="fragment" -->
+---
+`Makefiles` can have variables
+
+```sh
+OBJS = foo.o bar.o
+
+foo.o: foo.c
+    gcc -c -g -o foo.o foo.c
+bar.o: bar.c
+    gcc -c -g -o bar.o bar.c
+foobar: $(OBJS)
+    gcc -g -o foobar $(OBJS)
+```
+
+Better, but still some repetitive code <!-- .element: class="fragment" -->
+---
+`Makefiles` can have pattern rules
+
+```make
+OBJS = foo.o bar.o
+PROG = foobar
+
+# All .o files depend on corresponding .c file
+%.o: %.c 
+    # $@ is the target
+    # $< is the first dependency
+    gcc -c -g -o $@ $<  
+
+$(PROG): $(OBJS)
+    # $^ is all dependencies
+    gcc -g -o $@ $^  
+```
+
+This scales to a large number of dependencies<!-- .element: class="fragment" -->
+---
+A `Makefile` should include a `clean` target
+```make
+OBJS = foo.o bar.o
+PROG = foobar
+
+%.o: %.c 
+    gcc -c -g -o $@ $<  
+
+$(PROG): $(OBJS)
+    gcc -g -o $@ $^
+
+clean:
+    rm -rf $(OBJS) $(PROG)
+```
+
+You should never commit build products to the repo
+
+[download this Makefile](./Makefile)
+<!-- .element: class="fragment" -->
+---
+## Be Careful
+1. Recipes must be indented by a tab character, not spaces
+1. Never put a .c file in `OBJS` since it will be deleted by `make clean`

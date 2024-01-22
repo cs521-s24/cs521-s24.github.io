@@ -1,0 +1,56 @@
+---
+layout: raw
+---
+# Autograder
+
+`grade` is a python script designed to build and test student projects
+---
+1. Clone the `autograder` repo into the home directory on a lab machine
+    ```sh
+    $ cd ~
+    $ git clone git@github.com:/phpeterson-usf/autograder
+    ```
+1. Put it on your `PATH` in `~/.bashrc`
+    ```sh
+    $ micro .bashrc
+    ```
+    Add to the bottom of `.bashrc`
+    ```sh
+    export PATH=~/autograder:$PATH
+    ```
+1. Run `.bashrc`
+    ```sh
+    $ source .bashrc
+    ```
+---
+1. Clone the `tests` repo for our class onto your machine
+    ```sh
+    $ cd ~
+    $ git clone git@github.com:/cs221-03-f23/tests
+    ```
+
+2. New test cases will be added for each assignment so you will
+    ```sh
+    $ cd ~/tests
+    $ git pull
+    ```
+    at least once per week
+---
+1. To use `grade`
+    ```sh
+    user@host:~/lab02-yourgithubid $ grade test -p lab02
+
+    ```
+
+2. If you fail a test case and want to see why
+    ```sh
+    user@host:~/lab02-yourgithubid $ grade test -v -p lab02
+    ```
+    -v (verbose) means print the expected input and expected vs. actual output for failing test cases. Actual vs. expected is printed in diff format.
+---
+1. `grade` has configuration options in `~/.config/grade/config.toml`
+2. If you want to put `tests` somewhere besides `~` you can edit `config.toml`
+    ```sh
+    testspath = "~/cs221/tests"
+    ```
+3. More configuration options are available in the [README](https://github.com/phpeterson-usf/autograder/)

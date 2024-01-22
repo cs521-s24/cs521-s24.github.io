@@ -1,0 +1,57 @@
+---
+layout: raw
+---
+
+# Parse Tree 
+
+--- 
+# Language parsing
+
+now you have a list of tokens 
+depending on where the tokens are the meaning(=evaluated result) changes
+
+```sh
+(1+2)*3 
+1+(2*3)
+```
+
+We build a parse tree - leaves are operands and non-leaf nodes are operators
+---
+# Tree
+
+A tree is a data structure where 
+
+	1) there is only one root node
+
+	2) a parent node may have pointers to child nodes
+
+	3) a node without child nodes is a leaf node
+
+	4) there is only one path from any leaf to root node
+
+---
+# Parse tree node 
+
+In lab06, we use `struct parse_node_st`
+
+```c
+struct parse_node_st {
+    enum parse_expr_enum type;
+    union {
+        struct {
+            int value;
+        } intval;
+        struct {
+            enum parse_oper_enum oper;
+            struct parse_node_st *operand;
+        } oper1;
+        struct {
+            enum parse_oper_enum oper;
+            struct parse_node_st *left;
+            struct parse_node_st *right;
+        } oper2;
+    };                
+};
+```
+
+---

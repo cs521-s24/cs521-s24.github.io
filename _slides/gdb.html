@@ -1,0 +1,58 @@
+---
+layout: raw
+---
+
+# GDB - GNU Project Debugger
+
+--- 
+# GDB
+
+[GNU](https://www.gnu.org/) Project's open source debugger for C/C++ 
+
+Common usage includes:
+
+- set a breakpoint on a line in the code
+
+- print a value of a variable or an expression
+
+- follow the execution (run the next line)
+
+- follow the function calls (step into a function)
+
+---
+
+# Demo
+
+example [C file](https://github.com/cs221-s23/inclass/blob/main/week03/section01/gdb_demo.c) with a bug
+
+
+---
+
+# Using printf for debugging
+
+example [C file](https://github.com/cs221-s23/inclass/blob/main/week03/section01/gdb_demo.c) with a bug
+
+- cannot inspect a variable/expression while running
+- cannot follow the control flow (which if/else branch?)
+
+---
+# Useful command list (1)
+
+- run or r –> executes the program from start to end. (with the command line arguments)
+- break or b –> sets breakpoint on a particular line.
+- next or n -> executes next line of code, but don’t dive into functions.
+- step –> go to next instruction, diving into the function.
+- print or p –> used to display the stored value.
+- quit or q –> exits out of gdb.
+
+
+---
+# Useful command list (2)
+
+- backtrace or bt -> prints the backtrace of the entire stack
+- disable -> disable a breakpoint.
+- enable –> enable a disabled breakpoint.
+- clear –> to clear all breakpoints.
+- continue –> continue normal execution.
+- list or l –> displays the code. (default 10 lines)
+

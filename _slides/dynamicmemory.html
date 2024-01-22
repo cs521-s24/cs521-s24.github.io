@@ -1,0 +1,37 @@
+---
+layout: raw
+---
+# Dynamic Memory Allocation
+
+- how to allocate memory during run time, e.g. user input
+- static memory allocation happens at compile time. e.g. int list[10]
+- malloc(), calloc(), realloc(), free()
+---
+
+# malloc()
+
+- in <stdlib.h>
+- allocates additional memory of numBytes from heap
+```sh
+malloc(numBytes)
+```
+- return type is a pointer to the beginning of the allocated memory
+- returns null if allocation fails
+---
+
+# variable declaration vs. allocation 
+
+```sh
+char* strm /* declares a pointer variable. content will be char */
+char strs[10] /* declares and also allocates memory at compile time */
+strm = malloc(10); /* allocates memory at run time */
+```
+---
+
+# free()
+
+- also in <stdlib.h>
+- frees allocated memory = gives the control back to OS
+- ptr = malloc() and free(ptr) work in pairs in the same scope
+
+---

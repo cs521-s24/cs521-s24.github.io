@@ -1,0 +1,93 @@
+---
+layout: raw
+---
+# Intro to Networking
+---
+## Computers can communicate with each other
+- But how, exactly?<!-- .element: class="fragment" -->
+- What services are provided? How do they work?<!-- .element: class="fragment" -->
+- How can C programmers utilize these services?<!-- .element: class="fragment" -->
+---
+## History
+- There have been many HW/SW systems for networking
+- Even a [system](https://en.wikipedia.org/wiki/OSI_model) for describing network systems
+- Today, the Internet Protocol Suite ([TCP/IP](https://en.wikipedia.org/wiki/Internet_protocol_suite)) is the dominant *transport protocol*
+- *Application protocols* are built on top of TCP
+---
+## Interfaces
+- Every *interface* (Ethernet port, USB port, or WiFi card/chip) has a **physical** [MAC address](https://en.wikipedia.org/wiki/MAC_address)
+- MAC addresses never change
+- To communicate on a network, an interface must have a **logical** IP address
+- Network routers map MAC addresses to IP addresses
+---
+## What is an IP address?
+- An IPv4 address is a 32-bit number, written as 4 one-byte sequences (*octets*), e.g. `10.0.1.2`
+- IP addresses must be unique on a network
+- Network admins may give their computers a *static IP address* or dynamic address assignment
+---
+## IP address range
+- 2^32 addresses is not that big a number (about 4.3 billion)
+- Today, public IPv4 addresses are in short supply
+- IPv6 uses 2^128 addresses for a lot more range, e.g. `fe80::5054:ff:fed3:28f0`
+- Within the lab network, we will use IPv4 addresses
+---
+## Loopback Addresses
+- Programs can connect to their own computer (*host*) using the _loopback address_
+- The IPv4 loopback is `127.0.0.1` or `localhost` and the IPv6 loopback is `::1`
+---
+## `ifconfig` demo
+---
+## Public vs. Private Addresses
+- A router on the public Internet has a public address, owned by the Internet Service Provider (ISP)
+- The Internet Assigned Numbers Authority ([IANA](https://www.iana.org/)) allocates three ranges of IPv4 addresses to private networks 
+    - `10.x.y.z`
+    - `192.168.x.y`
+    - `172.16.x.y`
+- IPv6 addresses beginning with `fe80::` are private network addresses
+---
+## `curl ipinfo.io/ip`
+---
+## Routing
+- Routers keep a lookup table of MAC and IP addresses
+- Routers lend IP addresses to clients using *Dynamic Host Configuration* ([DHCP](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol))
+- Routers have a *subnet mask* and a range of assignable addresses
+- Routers use *Network Address Translation* ([NAT](https://en.wikipedia.org/wiki/Network_address_translation)) to map private addresses to their address on the outer/public network
+---
+## Transport Protocols
+- Two different ways to send *packets* 
+- UDP: Datagrams
+- TCP: Streams (a.k.a. *sessions*)
+- What's the difference?
+---
+## User Datagram Protocol (UDP)
+- "Fire and forget"
+- No guarantees about delivery, order of delivery
+- No error handling or retransmission
+---
+## Transmission Control Protocol (TCP)
+- Creates a *stream* of packets using sequence numbers
+- TCP guarantees delivery and order
+- TCP handles errors and retransmission
+---
+## Application Protocols
+- DNS maps *host/domain names* to IP addresses
+- HTTP delivers hypertext ([HTML](https://www.w3.org/)) documents
+- Internet Engineering Task Force ([IETF](https://www.ietf.org/)) standardizes many protocols
+---
+## Ports
+- Once we have an address and a protocol, we need a *port*
+- Ports are 16-bit integers (0 - 65,535)
+- Port numbers < 1024 are standardized by IANA, and require elevated privileges to use
+---
+## Network Byte Order
+- Different computer architectures store integers in different formats
+- *Big-endian* means that `0xAABBCCDD` is stored in memory as `0xAA`, `0xBB`, `0xCC`, `0xDD`
+- *Little-endian* means it's stored as `0xDD`, `0xCC`, `0xBB`, `0xAA`
+- IP networks [transmit](https://en.wikipedia.org/wiki/Endianness#Networking) multi-byte integers 
+in Big Endian format (*Network Byte Order*)
+---
+## gdb demo
+
+`p/x i`
+
+`x/8x (char*) &i`

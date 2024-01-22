@@ -1,0 +1,95 @@
+---
+layout: raw
+---
+# Sockets in C
+---
+## Caution
+- The sockets API is idiomatic C
+- Be careful
+- Check errors
+---
+## Connection Lifecycle
+- Get an IP address (usually by looking up a hostname in DNS)
+- Create a *socket* using the address, protocol, and port number
+- *Bind* the socket to the remote host
+- Loop over open sockets
+    - Write data
+    - Read data on ready sockets
+- Deallocate dynamic resources
+- In a [diagram](./tcp_architecture.jpg)
+---
+## Lookup a hostname
+
+```c
+#include < netdb.h>
+main() {
+    struct addrinfo hints;
+    hints.ai_family = AF_INET;      // IPv4
+    hints.ai_socktype = SOCK_DGRAM; // datagram socket
+    hints.ai_flags = 0;
+    hints.ai_protocol = 0;          // any protocol
+
+    struct addrinfo *results;       // array, allocated in gai()
+    int e = getaddrinfo("vlab00.cs.usfca.edu", "2221", &hints, 
+        &results);
+    if (e != 0) {
+        printf("getaddrinfo: %s\n", gai_strerror(e));
+        exit(-1);
+    }
+}
+```
+---
+## Make a socket File Descriptor
+```c
+#include < sys/socket.h>
+struct addrinfo *r;
+int fd;
+for (r = results; r != NULL; r = r->ai_next) {
+    fd = socket(r->ai_family, r->ai_socktype, r->ai_protocol);
+    if (fd == -1)
+        continue;
+    if (connect(fd, r->ai_addr, r->ai_addrlen) != -1)
+        break;                  // success
+    close(fd);
+}
+freeaddrinfo(results);         // dealloc array
+if (r == NULL) {               // no address succeeded
+    printf("Could not connect\n");
+    exit(-1);
+}
+```
+---
+## Connect socket and `addrinfo`
+```c
+if (connect(fd, rp->ai_addr, rp->ai_addrlen) != -1)
+    // connected!
+```
+---
+## Write on the connected socket
+```c
+if (write(fd, "hello", 6) == 6)
+    // success!
+```
+---
+## Read on the connected socket
+```c
+char buf[32];
+if (read(fd, buf, 32) != -1)
+    // success!
+```
+---
+## Deallocate resources
+```c
+close(fd);
+freeaddrinfo(results);
+```
+---
+## getaddrinfo
+---
+## Key Concepts
+1. A socket file descriptor is just an `int`
+1. File descriptors can be used with `read()` and `write()` system calls
+1. Clients: lookup, socket, connect, read/write
+1. Servers: socket, bind, recvfrom (UDP)
+1. Check errors. Use `perror()`
+

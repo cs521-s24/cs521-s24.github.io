@@ -42,6 +42,9 @@ collections:
   assignments:
     output: true
     permalink: /:collection/:name
+  docs:
+    output: true
+    permalink: /:collection/:name
 
 ordered-categories:
   - "Fourth Thing"

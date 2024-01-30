@@ -4,7 +4,7 @@ due: 2024-01-30 23:59:59 -0800
 permalink: assignments/lab02.html
 title: Lab02 - Strings
 github_url: https://classroom.github.com/a/z-acwJhV
-published: false
+published: true
 ---
 
 ## Requirements

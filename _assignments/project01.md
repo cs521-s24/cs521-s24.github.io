@@ -15,13 +15,19 @@ In this assignment, we will implement [Dictionary Attack](https://en.wikipedia.o
 
 ## Requirements
 
+### Technical requirements
+
 1. You will develop a C program which takes a hashed password (64 characters in length) on the command line.
 1. Your program will compare the given hash with:
     1. The hash of each of a list of 10,000 common passwords (10k tests)
     1. The hash of each of the 10,000 passwords after substituting common "l33t speak" transformations like 'e' to '3' (10k-l33t tests)
     1. The hash of each of the 10,000 passwords with a '1' added to the end (10k-plus1 tests)
 1. If the given hash matches any of those hashes, your program should print the clear-text password of the match. Otherwise, print "not found".
-1. Your program must be called `project01` and must be built by a `Makefile` you provide.
+1. When your program matches one of the hashes, it should calculate the number of bits of entropy as shown in the example output. 
+
+### Logistical requirements
+
+1. Your program must be called `project01`, must be built by a `Makefile` you provide, and must run in the `clab` environment
 1. No credit will be given for projects which hard-code the hashes from the test cases and print the expected result without computing the result as described above.
 
 ## Given
@@ -40,27 +46,38 @@ In this assignment, we will implement [Dictionary Attack](https://en.wikipedia.o
     1. Change 't' to '+'
 1. The test case for plus1 is separate from the test case for l33t, so yankees1 should match yankees, but y@nk33s1 should not match yankees. 
 1. If you want to test some password hashes, there are many SHA-256 calculators online, including [this one](https://xorbin.com/tools/sha256-hash-calculator)
+1. Entropy is the randomness of the password from the perspective of an attacker trying to crack the password. Entropy in bits (base 2) is calculated using the formula:
+    `log10(characters in pool ^ length of password) / log10(2)`
 
 ## Example Output
 
 ```sh
 $ ./project01 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
 password
+bits of entropy: 37
 
 $ ./project01 15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225
 123456789
+bits of entropy: 29
 
 $ ./project01 84f081273670181b0d00600d4972de62686806e8e98e14fd423dd3ad6f9e0f5b
 niners
+bits of entropy: 28
 
 $ ./project01 7e016a27dae18f63bb89e1455273332e4eab64a5308575ab9494dc78f06960bc
 n!n3r$
+bits of entropy: 36
 
 $ ./project01 ef60a458e0016857ade43406a7cfd256a904f8becd75c660b19ac72831f502d6
 niners1
+bits of entropy: 36
 
 $ ./project01 c9e100f0214a368bc599534b9d25877699aba73adb3b8691f2021de9eddf96c9
 not found
+
+$ .project01 95817f9a13435ae28a022203048e89b84d03cedede6cd794e34b5e6af8af4c08
+CowPencilTruck
+bits of entropy: 79
 ```
 
 ## Rubric

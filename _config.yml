@@ -48,7 +48,7 @@ collections:
 
 ordered-categories:
   - "Fourth Thing"
-  - "Third Thing"
+  - "File I/O"
   - "Password Security"
   - "Intro to C"
 

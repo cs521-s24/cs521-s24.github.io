@@ -27,6 +27,7 @@ In lab03, you will develop a C program: lab03.c that creates a dictionary file f
 1. You will use the C file management functions to open, write, and close a file
 1. You will handle error conditions **exactly** as shown in the example output
 1. You will provide a `Makefile` and test your project with the `grade` script
+1. Do not commit/push your `dictionary` file to `github.com`. That way, autograder can test what happens when the file does not exist
 
 ## Given
 

@@ -11,7 +11,7 @@ published: true
 
 1. You will write a C program and `Makefile` which find files in a given directory
     ```text
-    $ ./search foo.txt
+    $ ./project02 foo.txt
     ./bar/baz/foo.txt
     ```
 1. Your solution must be recursive; that is, a function which calls itself

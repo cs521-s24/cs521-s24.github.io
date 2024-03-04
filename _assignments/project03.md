@@ -1,6 +1,6 @@
 ---
 layout: assignment
-due: 2024-03-07 23:59:59 -0800
+due: 2024-03-19 23:59:59 -0800
 permalink: assignments/project03.html
 title: Project03 - Elastic Array, File Stat
 github_url: https://classroom.github.com/a/K1C_qhBi

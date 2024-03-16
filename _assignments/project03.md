@@ -9,7 +9,6 @@ published: true
 
 ## Requirements
 
-### This is a short draft for 2/27 lecture. More examples and test cases to come
 ### Part 1
 
 1. In C, arrays have fixed size, and are not dynamically resizable as in Python and Java

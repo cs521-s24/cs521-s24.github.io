@@ -13,7 +13,22 @@ published: true
 ### Part 1
 
 1. In C, arrays have fixed size, and are not dynamically resizable as in Python and Java
-1. You will implement a resizable array in C, called `rarray`. The header file for rarray will be given in the inclass repo
+1. You will implement a resizable array in C, called `rarray`. The header file for rarray is given in the inclass repo
+1. Test cases are numbered 1 to 5, with the test case name being the first 
+argument, followed by an array of integers
+1. Example output
+    ```
+    ./rarray 2 100 200 300
+    100
+    200
+    300
+    ```
+1. The code for each test case is given in `rarray_main.c` in the inclass repo. The function of each test case is
+    1. Create a resizable array of zero length
+    2. Create a resizable array and add the given array into the array as 4-byte elements. Print the array values by providing a callback function pointer to `rarray_iterate()`
+    3. Create a resizable array and get the value of the 0th element
+    4. Create a resizable array and remove the 0th element, resizing to the new smaller size by using `memcpy()`
+    5. Create a resizable array and sort its contents using `rarray_sort()` by providing a callback function pointer for `qsort()`
 
 ### Part 2
 

@@ -33,20 +33,20 @@ argument, followed by an array of integers
 
 1. Now that you have a resizable array, you can use it to traverse the filesystem and make a list of files, even if you don't know how many there are.
     ```text
-    $ project03 /usr/include
-    /usr/include
-    /usr/include/python3.9
-    /usr/include/python3.9/pyconfig-64.h
-    /usr/include/openssl
-    /usr/include/openssl/md5.h
-    /usr/include/openssl/aes.h
-    /usr/include/openssl/mdc2.h
-    /usr/include/openssl/asn1.h
-    /usr/include/openssl/modes.h
+    $ ./project03 -l 10 /usr/include
+    /usr/include/python3.9/pyconfig-64.h 47979
+    /usr/include/openssl/md5.h 1696
+    /usr/include/openssl/aes.h 3752
+    /usr/include/openssl/mdc2.h 1441
+    /usr/include/openssl/asn1.h 60914
+    /usr/include/openssl/modes.h 10786
+    /usr/include/openssl/asn1_mac.h 398
+    /usr/include/openssl/obj_mac.h 228668
+    /usr/include/openssl/asn1err.h 7731
+    /usr/include/openssl/objects.h 6848    
     ```
 1. Options
     ```text
-    -h -- print the file size in a human-readable format
     -s -- sort the files by size
     -l N -- limit the output to N files
     ```

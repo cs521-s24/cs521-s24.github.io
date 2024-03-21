@@ -1,8 +1,8 @@
 ---
 layout: assignment
-due: 2024-02-20 23:59:59 -0800
+due: 2024-03-26 23:59:59 -0800
 permalink: assignments/lab04.html
-title: Lab03 - Files, struct
+title: Lab04 - Lexical Analysis
 github_url: https://classroom.github.com/a/BV8E7K4Z
 published: true
 ---

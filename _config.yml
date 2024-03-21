@@ -47,7 +47,8 @@ collections:
     permalink: /:collection/:name
 
 ordered-categories:
-  - "Fourth Thing"
+  - "Networking"
+  - "Programming Languages"
   - "File I/O"
   - "Password Security"
   - "Intro to C"

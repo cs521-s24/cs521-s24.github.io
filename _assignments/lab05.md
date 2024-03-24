@@ -1,0 +1,199 @@
+---
+layout: assignment
+due: 2024-04-02 23:59:59 -0800
+permalink: assignments/lab05.html
+title: Lab05 - Parsing
+github_url: https://classroom.github.com/a/Kr2-yld1
+published: true
+---
+
+{% assign img_base = site.url | append: site.baseurl | append: "/assets/img" %}
+
+## Language Parsing
+
+1. This lab asks you to expand on the given parser, adding code and data structures to fully implement the scanning and parsing of the language specified in the EBNF
+1. It is still a future topic to interpret the parse tree and do something useful with it. This lab covers only parser output
+1. Parsing refers to the process of identifying acceptable structures as defined by a language. For example, our scanner from Lab05 can accept the following:
+    ```
+    1 + 2
+    ```
+This results in the following sequence of tokens:
+    ```
+    TK_INTLIT("1")
+    TK_OP("+")
+    TK_INTLIT("2")
+    TK_EOT("")
+    ```
+1. We now need to *parse* these tokens to see if they represent a valid expression. Parsing will: 
+- Determine if a sequence of tokens is a valid program
+- Construct a data structure from the tokens that can later be used for interpretation or compilation
+
+1. The token sequence above can be represented as the following tree:
+
+    ![parse-tree-1]({{ img_base }}/parse-tree-1.jpg)
+
+1. We call this a *parse tree* (or technically an *abstract syntax tree* or *AST*). 
+- The nodes in the tree represent different parts of the structure of a valid program
+- In this case, the program consists of a single expression
+- This expression is an operator with two arguments (or operands). The expression operator is a PLUS ("+") and the two operands are both `intval`
+- We can represent this tree structure as a string:
+    ```
+    EXPR OPER2 PLUS
+    ..EXPR INTVAL 1
+    ..EXPR INTVAL 2
+    ```
+1. Consider the following program:
+    ```
+    (1 + 2) * 3
+    ```
+    The scan tokens are:
+    ```
+    TK_LPAREN("(")
+    TK_INTLIT("1")
+    TK_PLUS("+")
+    TK_INTLIT("2")
+    TK_RPAREN(")")
+    TK_MULT("*")
+    TK_INTLIT("3")
+    TK_EOT("")
+    ```
+    The parse tree for that token sequence is:
+
+    ![parse-tree-2]({{ img_base }}/parse-tree-2.jpg)
+
+    The string representation of that parse tree is:
+    ```
+    EXPR OPER2 MULT
+    ..EXPR OPER2 PLUS
+    ....EXPR INTVAL 1
+    ....EXPR INTVAL 2
+    ..EXPR INTVAL 3
+    ```
+
+1. Notice that in both the tree and the string output there are no parentheses. This is because the tree form implicitly represents grouping. We discard the parens themselves, but not what they represent in terms of program structure.
+Here is the EBNF for the scanner of our language:
+    ```
+    tokenlist   = (token)*
+    token       = integer | symbol
+    integer     = digit (digit)*
+    symbol      = '+' | '-' | '*' | '/' | '(' | ')'
+    digit       = '0' | ... | '9'
+    # Ignore
+    whitespace  =  (' ' | '\t') (' ' | '\t')*
+    ```
+1. We can also represent the structure of valid programs with the EBNF:
+    ```
+    program     = expression EOT
+    expression  = operand (operator operand)*
+    operand     = integer | '-' operand | '(' expression ')'
+    ```
+1. We will limit valid programs to expessions. For example, the following are valid expressions:
+    ```
+    1 + 2
+    (1 + 2) * 3
+    4 * (10 / 5)
+    (2 * (3 + (1 + 1)))
+    -4 + 3
+    -4 + -4
+    ```
+1. Just like with scanning, the EBNF specifies valid programs in terms of tokens
+- An expression can be an operand followed by an operator and another operand
+- An operand can be an integer, or a '-' then an operand, or another expression within parens
+
+## C Implementation
+
+1. We need a data structure in C that will represent the tree structures given above. Here is the `struct` we will use:
+    ```c
+    enum parse_expr_enum {EX_INTVAL, EX_OPER1, EX_OPER2};
+    enum parse_oper_enum {OP_PLUS, OP_MINUS, OP_MULT, OP_DIV};
+    struct parse_node_st {    
+        enum parse_expr_enum type;
+        union {
+            struct {
+                int value;
+            } intval;
+            struct {
+                enum parse_oper_enum oper;
+                struct parse_node_st *expr;
+            } oper1;
+            struct {
+                enum parse_oper_enum oper;
+                struct parse_node_st *left;
+                struct parse_node_st *right;
+            } oper2;
+        };
+    };
+    ```
+1. We will derive a *recursive descent parser* from the EBNF for expressions given above to construct a tree of `parse_node_st` structs. As with scanning, we will write a function for each production in the grammar. 
+1. We will have two parse functions:
+    ```c
+    struct parse_node_st * parse_operand(struct scan_table_st *st);
+    struct parse_node_st * parse_expression(struct scan_table_st *st);
+    ```
+Given a sequence of tokens in a `scan_table_st`, we will recursively construct a parse tree by allocating `parse_node_st` structs.
+
+## Requirements
+
+1. You will implement a parser, called `lab05`, generated by a `Makefile`
+1. Your parser will:
+- Take an input expression on the command line after the "-e" option
+- Scan the input expression string into tokens
+- Parse the tokens into a tree of `parse_node_st`
+- Walk the tree to generate indented output as shown
+- Your parser will to base conversion from `TK_BINLIT` and `TK_HEXLIT` into an `int` for `intval` operands without using C `atoi()` or `sscanf()`
+1. You should `git pull` in the `tests` repo to get new test cases
+
+## Example Output
+
+```sh
+./lab05 -e "1 + 2"
+EXPR OPER2 PLUS
+..EXPR INTVAL 1
+..EXPR INTVAL 2
+
+./lab05 -e "(1 + 2) * 3"
+EXPR OPER2 MULT
+..EXPR OPER2 PLUS
+....EXPR INTVAL 1
+....EXPR INTVAL 2
+..EXPR INTVAL 3
+
+./lab05 -e "4 * (10 / 5)"
+EXPR OPER2 MULT
+..EXPR INTVAL 4
+..EXPR OPER2 DIV
+....EXPR INTVAL 10
+....EXPR INTVAL 5
+
+./lab05 -e "(2 * (3 + (1 + 1)))"
+EXPR OPER2 MULT
+..EXPR INTVAL 2
+..EXPR OPER2 PLUS
+....EXPR INTVAL 3
+....EXPR OPER2 PLUS
+......EXPR INTVAL 1
+......EXPR INTVAL 1
+
+./lab05 -e "-4 + 3"
+EXPR OPER2 PLUS
+..EXPR OPER1 MINUS
+....EXPR INTVAL 4
+..EXPR INTVAL 3
+
+./lab05 -e "-4 + -4"
+EXPR OPER2 PLUS
+..EXPR OPER1 MINUS
+....EXPR INTVAL 4
+..EXPR OPER1 MINUS
+....EXPR INTVAL 4
+
+./lab05 -e "1 + 0xa"
+EXPR OPER2 PLUS
+..EXPR INTVAL 1
+..EXPR INTVAL 10
+
+./lab05 -e "1 + 0xff"
+EXPR OPER2 PLUS
+..EXPR INTVAL 1
+..EXPR INTVAL 255
+```

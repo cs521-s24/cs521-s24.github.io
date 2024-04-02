@@ -4,7 +4,7 @@ due: 2024-04-09 23:59:59 -0800
 permalink: assignments/project04.html
 title: Project04 - Expression Interpreter
 github_url: https://classroom.github.com/a/3iNNokUO
-published: false
+published: true
 ---
 
 ## Requirements
@@ -71,11 +71,27 @@ $ ./project04 -b 2 -e "(0xF << 0x4) + 1"
 
 ## Rubric
 1. 80 pts: automated tests
-1. 20 pts: neatness 
-1. 2 pts: extra credit. Add support for outputting binary and hexadeximal numbers which are 8-bits wide, or 16-bits wide, in addition to 32 bits. Use the command-line parameter `-w` to specify the width, e.g.
-    ```
-    $ ./project04 -e "0xA + 1" -b 2 -w 8
-    0b00001011
-    $ ./project04 -e "(0xA + 2) - 1" -b 2 -w 16
-    0b0000000000001011
+1. 20 pts: interactive grading for neatness and correctness
+1. 5 pts: extra credit. Add support for variables and `print()` functions using the following EBNF. You'll need to read the source code from a file. I can provide test cases if there's interest:
+    ```text
+    program     = (statement '\n')* EOT
+
+    statement   = print_statement
+                | assignment_statement
+
+    print_statement = 'print' '(' expression ',' expression ',' expression ')'
+
+    assignment_statement = ident '=' expression
+
+    expression  = operand (operator operand)*
+
+    operand     = intlit
+                | hexlit
+                | binlit
+                | ident
+                | '-' operand
+                | '~' operand
+                | '(' expression ')'
+
+    ident      = alpha (alpha | digit | '_' )*
     ```

@@ -72,26 +72,38 @@ $ ./project04 -b 2 -e "(0xF << 0x4) + 1"
 ## Rubric
 1. 80 pts: automated tests
 1. 20 pts: interactive grading for neatness and correctness
-1. 5 pts: extra credit. Add support for variables and `print()` functions using the following EBNF. You'll need to read the source code from a file. I can provide test cases if there's interest:
-    ```text
-    program     = (statement '\n')* EOT
+1. 5 pts: extra credit. 
+    1. Add support for variables and `print(data, base)` functions using the following EBNF
+        ```text
+        program     = (statement '\n')* EOT
 
-    statement   = print_statement
-                | assignment_statement
+        statement   = print_statement
+                    | assignment_statement
 
-    print_statement = 'print' '(' expression ',' expression ',' expression ')'
+        print_statement = 'print' '(' expression ',' expression ')'
 
-    assignment_statement = ident '=' expression
+        assignment_statement = ident '=' expression
 
-    expression  = operand (operator operand)*
+        expression  = operand (operator operand)*
 
-    operand     = intlit
-                | hexlit
-                | binlit
-                | ident
-                | '-' operand
-                | '~' operand
-                | '(' expression ')'
+        operand     = intlit
+                    | hexlit
+                    | binlit
+                    | ident
+                    | '-' operand
+                    | '~' operand
+                    | '(' expression ')'
 
-    ident      = alpha (alpha | digit | '_' )*
-    ```
+        ident      = alpha (alpha | digit | '_' )*
+        ```
+    1. You'll need to read the source code from a file. Five test cases are provided
+        ```text
+        $ cat ../../tests/project04-ec/simple.txt
+        x = 10
+        print(x, 16)
+        $ ./project04 -f ../../tests/project04-ec/simple.txt
+        0x0000000A
+        ```
+    1. To earn the extra credit you must
+        1. Pass all of the test cases for regular credit
+        1. Utilize the scanner/parser/eval techniques we discussed. No credit will be given for ad-hoc or hard-coded solutions.

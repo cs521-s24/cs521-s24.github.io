@@ -16,13 +16,18 @@ published: false
 
 ## Example output
 
-1. You need to set up SSH port forwarding. If you were using port 9000 (use the same port number you used for lab07 and lab08) on `vlab07`, then run the following command so that your web browser's connection to `localhost` on port 9000 will be forwarded to `vlab07` on port 9000.
+1. You need to set up SSH port forwarding. If you were using port 9000 (use the same port number you used for lab06 and lab07) in a container, then open a second terminal and run the following command to get your container's IP address
+	```sh
+	$ clabip
+	172.17.0.22
+	```
+1. Run a terminal on your laptop and run this command so that your web browser's connection to `localhost` on port 9000 will be forwarded to your container on port 9000.
 
 	```sh
-	ssh -L 9000:vlab07:9000 stargate
+	$ ssh -J stargate -L 9000:172.17.0.22:9000 medusa
 	```
 
-1. Go to localhost:9000 on your web browser. Your HTTP server on `vlab07` should respond. For the content of your server, use the content of CS521 website ![as shown below]({{ img_base }}/project05_screenshot.png).
+1. Go to localhost:9000 on your web browser. Your HTTP server running in your container should respond. For the content of your server, use the content of CS521 website ![as shown below]({{ img_base }}/project05_screenshot.png).
 
 1. Click on the links - the contents must match what you would see on the official CS521 website. 
 
@@ -31,11 +36,11 @@ published: false
 1. Download the content of cs521 course website to serve from your own web server. To scrape the site, run
 
 	```sh
-	wget --recursive --page-requisites --convert-links cs521-s24.github.io
+	$ wget --recursive --page-requisites --convert-links cs521-s24.github.io
 	```
 1. If you wish to store the content in `www` directory, move the contents as follows.
 	```sh
-	mv cs251-s24.github.io www
+	$ mv cs251-s24.github.io www
 	```
 1. You may use `fseek()` and `ftell()` function to get the size of the file for the `Content-Length: ` part. The following line puts the file position indicator for the stream pointed to by `stream`to the end of the file, and `ftell(stream)` returns the current offset (position) in bytes. 
 
@@ -60,12 +65,12 @@ published: false
 
 ## Grading process
 
-1. Project05 will be interactively graded by peers on Tuesday, December 5th, the last class day of the semester using the rubric below. 
+1. Project05 will be interactively graded by peers on Thu, May 9th, the last class day of the semester using the rubric below. 
 	1. Everyone will submit a google form with the scores. TAs will review for an error in grading and enter the scores in Canvas.
-	1. An absence during the peer-grading session will result in 0 for project05. If you have a documented excuse, please arrange a make-up grading session with the instructor by May 4th. (The make-up session doesn't have to happen by May 4th. You just need to schedule one by then.) Failure to schedule a make-up sesion by May 4th will result in 0.
+	1. An absence during the peer-grading session will result in 0 for project05. 
 	1. Note that there is no resubmission for Project05 style. The peer-grading session happens on the last class day, so there is no time for resubmission and regrading. 
-    1. Grading meetings must use the vlab terminal environment, not local IDEs on your laptop or web pages on github.com
-    1. To ensure that everyone has the same deadline, grading meetings will start with `grade clone -p project05 -s your_github_id -d 2023-12-05` to get a clean repo
+    1. Grading meetings must use the clab terminal environment, not local IDEs on your laptop or web pages on github.com
+    1. To ensure that everyone has the same deadline, grading meetings will start with `grade clone -p project05 -s your_github_id -d 2024-05-08` to get a clean repo
 
 ## Rubric
 

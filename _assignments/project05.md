@@ -11,7 +11,7 @@ published: false
 
 ## Requirements
 
-1. In this project, you will evolve the TCP socket (lab07) and a basic HTTP server (lab08) into a more capable HTTP server. 
+1. In this project, you will evolve the TCP socket (lab06) and a basic HTTP server (lab07) into a more capable HTTP server. 
 1. You will add support for [path](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#path_to_resource) and embedded compontents such as [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) files in HTML. Note that you do not need to write a client-side program that handles CSS or any other HTML formatting. Your web browser will take care of it. 
 
 ## Example output

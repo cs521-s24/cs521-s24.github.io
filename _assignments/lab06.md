@@ -4,7 +4,7 @@ due: 2024-04-23 23:59:59 -0800
 permalink: assignments/lab06.html
 title: lab06 - HTTP server part 1 ping-pong
 github_url: https://classroom.github.com/a/3V94C4p6
-published: false
+published: true
 ---
 
 ## Requirements

@@ -59,6 +59,12 @@ if (r == NULL) {               // no address succeeded
 }
 ```
 ---
+## Bind the socket to an address
+```c
+bind(fd, r->ai_addr, r->ai_addrlen);
+```
+
+---
 ## Listen for connections socket and `addrinfo`
 ```c
 if (accept(fd, NULL, NULL) != -1)

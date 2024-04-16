@@ -30,7 +30,7 @@ main() {
     hints.ai_protocol = 0;          // any protocol
 
     struct addrinfo *results;       // array, allocated in gai()
-    int e = getaddrinfo("vlab00.cs.usfca.edu", "2221", &hints, 
+    int e = getaddrinfo(NULL, port, &hints, 
         &results);
     if (e != 0) {
         printf("getaddrinfo: %s\n", gai_strerror(e));
@@ -59,9 +59,9 @@ if (r == NULL) {               // no address succeeded
 }
 ```
 ---
-## Connect socket and `addrinfo`
+## Listen for connections socket and `addrinfo`
 ```c
-if (connect(fd, rp->ai_addr, rp->ai_addrlen) != -1)
+if (accept(fd, NULL, NULL) != -1)
     // connected!
 ```
 ---

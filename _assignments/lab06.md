@@ -11,7 +11,7 @@ published: true
 
 In project05, you will be implementing an [HTTP server](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_web_server), i.e. a program that handles an HTTP request and sends back an HTTP response. HTTP requests and responses are sent over TCP. In preparation for project05, you will implement a simple server on TCP.
 
-- The server should listen for incoming TCP connections on a specified port. [Here](ports.html) is the unique port number for each student.
+- The server should listen for incoming TCP connections on a specified port. [Here](https://docs.google.com/spreadsheets/d/1DwAs_8I8oszFGu4pyumPNm4pGQarJbsj4SyRZoXm_BQ/edit#gid=1442771876) is the unique port number for each student.
 - Your repo **must** include a file called `port.txt` which contains the port number for your server.
 - When a client connects, the server should wait for incoming data from the client.
 - If the incoming message is "PING", the server should respond with "PONG" and close the TCP connection.

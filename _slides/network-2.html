@@ -25,7 +25,7 @@ layout: raw
 main() {
     struct addrinfo hints;
     hints.ai_family = AF_INET;      // IPv4
-    hints.ai_socktype = SOCK_DGRAM; // datagram socket
+    hints.ai_socktype = SOCK_STREAM; // TCP socket
     hints.ai_flags = 0;
     hints.ai_protocol = 0;          // any protocol
 

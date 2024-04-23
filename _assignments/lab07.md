@@ -4,7 +4,7 @@ due: 2024-04-30 23:59:59 -0800
 permalink: assignments/lab07.html
 title: lab07 - HTTP server part 2
 github_url: https://classroom.github.com/a/lCkQzIpR
-published: false
+published: true
 ---
 
 ## Requirements

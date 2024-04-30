@@ -4,7 +4,7 @@ due: 2024-05-07 23:59:59 -0800
 permalink: assignments/project05.html
 title: Project05 - HTTP Server
 github_url: https://classroom.github.com/a/JHL0f7cS
-published: false
+published: true
 ---
 
 {% assign img_base = site.url | append: site.baseurl | append: "/assets/img" %}

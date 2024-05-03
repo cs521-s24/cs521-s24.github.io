@@ -90,4 +90,7 @@ published: true
 		1. Helpful comments (2 pts)	
 		1. No dead (commented-out) code or unnecessarily complex code (2 pts)	
 		1. No build products or output dictionary files in the repo (2 pts)
-
+	1. Extra credit (5 pts)
+		1. After you have completed the project using `poll()`, refactor your server to use `fork()` rather than `poll()`
+		1. Add a second build target to your `Makefile` to make the `fork()` version of your server
+		1. Explain the `fork()` version of your server to your grading partner
